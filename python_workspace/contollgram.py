@@ -155,3 +155,113 @@ def print_kwargs(**kwargs):
     print(kwargs)
 print_kwargs(a=1)
 print_kwargs(name='foo',age=3)
+
+#함수의 결과 값은 언제나 하나이다.
+
+def add_and_mul(a,b):
+    return a+b,a*b #2개의 파라미터를 받아 더한값과 곱한 값을 리턴해주는 함수이다.  튜플값으로 리턴해준다.
+
+#(result1, result2) = add_and_mul(3,4)
+result1, result2 = add_and_mul(3,4) #괄호가 생략된 형태
+print(result1)
+print(result2)
+
+#return 의 또 다른 쓰임새
+
+def say_nick(nick):
+    if nick =="바보":
+         return
+    print("나의 별명은 %s입니다" %nick)
+
+say_nick('무야호')
+say_nick('바보')
+
+#매개변수에 초기값 미리 설정하기 default 값이 들어가는 파라미터를 마지막에 넣자
+
+def say_myself(name,old,man=True):
+    print("나의 이름은 %s입니다."%name)
+    print("나이는%d입니다"%old)
+    if man:
+        print("남자입니다.")
+    else:
+        print("여자입니다.")
+
+#함수 안에서 선언한 변수의 효력 범위 scope
+
+#vartest.py
+a=1 #전역변수 a
+print(id(a))
+def vartest(a): #지역변수 a :지역변수는 함수 종료되면 소멸
+    print(id(a))
+    a=a+1 #지역변수 a
+    print(id(a))
+
+vartest(a) # 전역변수
+print(a) #전역변수
+#안쪽 주소와 바깥쪽 주소가 다름. 변수를 담고있는 저장위치가 다르다는것은 서로 다른 데이터라는것
+
+a=1
+print(id(a))
+def vartest(b):
+    print(id(b))
+    c=b+1
+    print(id(c))
+    print(c)
+vartest(a)
+print(a)
+
+#global 명령어 사용 static 변수
+a=1
+def vartest():
+    global a
+    a=a+1
+vartest()
+print(a)
+
+#lambda 람다식
+
+#add= lambda a,b:a+b  # 함수명 =lambda parameter1,parameter1 : 식 // 자바스크립트()=> 본문 ->
+#result=add(3,4)
+#print(result)
+
+#프롬프트 띄워서 출력  input으로 입력되는 모든 것은 문자열로 취급된다.
+
+#number = input("숫자를 입력하세요 :")
+#print(number)
+#파일 열기
+#writedata.py
+f=open("c:/doit/새파일.txt","w")
+for i in range(1,11):
+    data="%d 번째 줄입니다.\n"% i
+    f.write(data)
+f.close()
+
+#application 안으로 들어오는것  input app이 바깥으로 내보내는것  output :
+# APP 기준으로  들어오는것과( input ) 나오는것 (output)
+
+#readLines 사용하기 리턴값이 문자이기 때문에 반복문으로 뽑아옴
+
+f=open("C:/doit/새파일.txt",'r')
+lines=f.readlines()
+for line in lines:
+    print(line,end="")
+f.close()
+
+#read 함수 사용하기 리턴값이 문자열
+
+f=open("C:/doit/새파일.txt","r")
+data = f.read()
+print(data)
+f.close()
+
+#파일에 새로운 내용 추가하기 'a' (append)
+
+#with 문과 함께 사용하기 자동으로 close()해줌
+#f=open("foo.txt",'w')
+#f.write("Life is too short, you need python")
+#f.close()
+
+with open("foo.txt","w") as f:
+    f.write("Lisf is too short, you need python")
+
+#sys 모듈로 매개변수 주기
